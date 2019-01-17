@@ -1,11 +1,12 @@
 # Please Note:
-Since this adaption for Pytorch 1.0 of the existing implementation (https://github.com/lupoglaz/TorchProteinLibrary/) is currently pretty hacky, all warnings like 
+This adaption for Pytorch 1.0 of the existing implementation (https://github.com/lupoglaz/TorchProteinLibrary/) is currently pretty hacky.
+Compared to the original implementation, all warnings like 
 ```
 if( filenames.dtype() != at::kByte || res_names.dtype() != at::kByte || atom_names.dtype() != at::kByte || coords.dtype(!= at::kDouble){
             throw("Incorrect tensor types");
 }
 ``` 
-have been currently removed. However, it seems to work with Pytorch 1.0.
+have been removed, but will be reimplemented.
 
 # TorchProteinLibrary version 0.1
 This library pytorch layers for working with protein structures in a differentiable way. We are working on this project and it's bound to change:
