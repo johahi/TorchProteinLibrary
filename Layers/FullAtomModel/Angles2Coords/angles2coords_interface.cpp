@@ -87,7 +87,7 @@ void Angles2Coords_backward(    at::Tensor grad_atoms,
         int num_atoms = ProtUtil::getNumAtoms(seq, add_terminal);
         
         //OLD: at::Tensor dummy_coords = at::CPU(at::kDouble).zeros({3*num_atoms});
-        at::Tensor dummy_coords = torch::zeros({3*num_atoms}, at::kCPU);
+        at::Tensor dummy_coords = torch::zeros({3*num_atoms}, at::device(at::kCPU).dtype(at::kDouble));
         cConformation conf( seq, single_angles.data<double>(), single_grad_angles.data<double>(),
                             length, dummy_coords.data<double>());
         conf.backward(conf.root, single_grad_atoms.data<double>());
@@ -109,7 +109,7 @@ void Angles2Coords_save(    const char* sequence,
     int num_atoms = ProtUtil::getNumAtoms(aa, add_terminal);
     at::Tensor dummy_grad = at::CPU(at::kDouble).zeros_like(input_angles);
     //OLD: at::Tensor dummy_coords = at::CPU(at::kDouble).zeros({3*num_atoms});
-    at::Tensor dummy_coords = torch::zeros({3*num_atoms}, at::kCPU);
+    at::Tensor dummy_coords = torch::zeros({3*num_atoms}, at::device(at::kCPU).dtype(at::kDouble));
     cConformation conf( aa, input_angles.data<double>(), dummy_grad.data<double>(), 
                         length, dummy_coords.data<double>());
     conf.save(std::string(output_filename), mode);

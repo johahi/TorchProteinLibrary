@@ -34,7 +34,7 @@ std::string StringUtil::string_format(const std::string fmt, ...) {
 
 at::Tensor StringUtil::string2Tensor(std::string s){
     //OLD: at::Tensor T = at::CPU(at::kByte).zeros({s.length()+1});
-    at::Tensor T = torch::zeros({s.length()+1}, at::kCPU);
+    at::Tensor T = torch::zeros({s.length()+1}, at::device(at::kCPU).dtype(at::kByte));
     char* aT = static_cast<char*>(T.data_ptr());
     for(int i=0; i<s.length(); i++)
         aT[i] = s[i];
@@ -131,7 +131,7 @@ void ProtUtil::rotate(THDoubleTensor *coords, cMatrix33 R){
 cMatrix33 ProtUtil::getRandomRotation(){
     auto default_gen = &at::globalContext().defaultGenerator(at::kCPU);
     //OLD: at::Tensor uni_rnd = at::CPU(at::kDouble).zeros({3});
-    at::Tensor uni_rnd = torch::zeros({3}, at::kCPU);
+    at::Tensor uni_rnd = torch::zeros({3}, at::device(at::kCPU).dtype(at::kDouble));
     uni_rnd.uniform_(0,1.0, default_gen);
     double u1 = uni_rnd.accessor<double,1>()[0];
     double u2 = uni_rnd.accessor<double,1>()[1];
@@ -164,7 +164,7 @@ cVector3 ProtUtil::getRandomTranslation(uint spatial_dim, cVector3 &b0, cVector3
 
     auto default_gen = &at::globalContext().defaultGenerator(at::kCPU);
     //OLD :at::Tensor uni_rnd = at::CPU(at::kDouble).zeros({3});
-    at::Tensor uni_rnd = torch::zeros({3}, at::kCPU);
+    at::Tensor uni_rnd = torch::zeros({3}, at::device(at::kCPU).dtype(at::kDouble));
     uni_rnd[0].uniform_(-dx_max, dx_max, default_gen);
     uni_rnd[1].uniform_(-dy_max, dy_max, default_gen);
     uni_rnd[2].uniform_(-dz_max, dz_max, default_gen);

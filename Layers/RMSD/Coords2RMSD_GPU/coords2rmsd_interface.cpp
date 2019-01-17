@@ -16,9 +16,9 @@ void Coords2RMSD_GPU_forward(   at::Tensor re_coordinates_src, at::Tensor re_coo
     int batch_size = num_atoms.size(0);
 
     //OLD: at::Tensor T = at::CUDA(at::kDouble).zeros({batch_size, 4, 4});
-    at::Tensor T = torch::zeros({batch_size,4,4}, at::kCUDA);
+    at::Tensor T = torch::zeros({batch_size,4,4}, at::device(at::kCUDA).dtype(at::kDouble));
     //OLD: at::Tensor rot_mat_t = at::CUDA(at::kDouble).zeros({batch_size, 3, 3});
-    at::Tensor rot_mat_t = torch::zeros({batch_size,3,3}, at::kCUDA);
+    at::Tensor rot_mat_t = torch::zeros({batch_size,3,3}, at::device(at::kCUDA).dtype(at::kDouble));
     //correlation matrix T
     cpu_correlationMatrix(  re_coordinates_src.data<double>(),
                             re_coordinates_dst.data<double>(),
@@ -40,14 +40,14 @@ void Coords2RMSD_GPU_forward(   at::Tensor re_coordinates_src, at::Tensor re_coo
         //getting maximum eigenvalue and eigenvector
         double max_eig_val = std::numeric_limits<double>::min();
         //OLD: at::Tensor max_eig_vec = at::CPU(at::kDouble).zeros({4});
-        at::Tensor max_eig_vec = torch::zeros({4}, at::kCPU);
+        at::Tensor max_eig_vec = torch::zeros({4}, at::device(at::kCPU).dtype(at::kDouble));
         auto q = max_eig_vec.accessor<double, 1>();
 
         //OLD: at::Tensor eig_vals = at::CPU(at::kDouble).zeros({4,2});
-        at::Tensor eig_vals = torch::zeros({4,2}, at::kCPU);
+        at::Tensor eig_vals = torch::zeros({4,2}, at::device(at::kCPU).dtype(at::kDouble));
         eig_vals.copy_(std::get<0>(result));
         //OLD: at::Tensor eig_vecs = at::CPU(at::kDouble).zeros({4,4}); 
-        at::Tensor eig_vecs = torch::zeros({4,4}, at::kCPU);
+        at::Tensor eig_vecs = torch::zeros({4,4}, at::device(at::kCPU).dtype(at::kDouble));
         eig_vecs.copy_(std::get<1>(result));
         auto eig_val = eig_vals.accessor<double, 2>();
 
@@ -82,10 +82,10 @@ void Coords2RMSD_GPU_forward(   at::Tensor re_coordinates_src, at::Tensor re_coo
         int num_atoms_cpu = num_atoms[i].item<int>();
         //computing R2 coefficient
         //OLD: at::Tensor R2 = at::CUDA(at::kDouble).zeros({1});
-        at::Tensor R2 = torch::zeros({1}, at::kCUDA);
+        at::Tensor R2 = torch::zeros({1}, at::device(at::kCUDA).dtype(at::kDouble));
         // auto R2_acc = R2.accessor<double,1>();
         //OLD: at::Tensor R2_tmp = at::CUDA(at::kDouble).zeros({3});
-        at::Tensor R2_tmp = torch::zeros({3}, at::kCUDA);
+        at::Tensor R2_tmp = torch::zeros({3}, at::device(at::kCUDA).dtype(at::kDouble));
         cpu_computeR2(re_coords_src_single.data<double>(), num_atoms_cpu, R2_tmp.data<double>());
         R2 += R2_tmp.sum();
         cpu_computeR2(re_coords_dst_single.data<double>(), num_atoms_cpu, R2_tmp.data<double>());
