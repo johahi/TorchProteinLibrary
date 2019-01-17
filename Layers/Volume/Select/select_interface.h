@@ -1,4 +1,4 @@
-#include <torch/torch.h>
+#include <torch/extension.h>
 
 void SelectVolume_forward(  at::Tensor volume,
                             at::Tensor coords,

@@ -1,4 +1,4 @@
-#include <torch/torch.h>
+#include <torch/extension.h>
 void Coords2RMSD_CPU_forward(   at::Tensor src, at::Tensor dst, at::Tensor rmsd,
                             at::Tensor ce_src, at::Tensor ce_dst,
                             at::Tensor U_ce_src, at::Tensor UT_ce_dst,

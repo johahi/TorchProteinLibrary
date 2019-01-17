@@ -80,7 +80,7 @@ if __name__=='__main__':
 					'Layers/RMSD/main_cpu.cpp'],
 					include_dirs = ['Layers/RMSD', 'Math'])
 	
-	RMSD_GPU = CppExtension('_RMSD_GPU',
+	RMSD_GPU = CUDAExtension('_RMSD_GPU',
 					sources = [
 					'Layers/RMSD/Coords2RMSD_GPU/coords2rmsd_interface.cpp',
 					'Layers/RMSD/RMSDKernels.cu',

@@ -7,13 +7,7 @@
 
 void PDB2CoordsOrdered(at::Tensor filenames, at::Tensor coords, at::Tensor res_names, at::Tensor atom_names){
     bool add_terminal = true;
-    if( filenames.dtype() != at::kByte || res_names.dtype() != at::kByte || atom_names.dtype() != at::kByte 
-        || coords.dtype() != at::kDouble){
-            throw("Incorrect tensor types");
-    }
-    if(coords.ndimension() != 2){
-        throw("Incorrect input ndim");
-    }
+    
 
     int batch_size = filenames.size(0);
     
@@ -55,10 +49,6 @@ void PDB2CoordsOrdered(at::Tensor filenames, at::Tensor coords, at::Tensor res_n
 }
 
 void PDB2CoordsUnordered(at::Tensor filenames, at::Tensor coords, at::Tensor res_names, at::Tensor atom_names, at::Tensor num_atoms){
-    if( filenames.dtype() != at::kByte || res_names.dtype() != at::kByte || atom_names.dtype() != at::kByte 
-        || coords.dtype() != at::kDouble || num_atoms.dtype() != at::kInt){
-            throw("Incorrect tensor types");
-    }
     if(coords.ndimension() != 2){
         throw("Incorrect input ndim");
     }

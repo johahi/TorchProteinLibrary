@@ -1,4 +1,4 @@
-#include <torch/torch.h>
+#include <torch/extension.h>
 
 int Angles2Backbone_forward(at::Tensor input_angles, 
                             at::Tensor output_coords, 

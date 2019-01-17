@@ -1,4 +1,4 @@
-#include <torch/torch.h>
+#include <torch/extension.h>
 void TypedCoords2Volume_forward(    at::Tensor input_coords,
                                         at::Tensor volume,
                                         at::Tensor num_atoms_of_type,

@@ -1,4 +1,4 @@
-#include <torch/torch.h>
+#include <torch/extension.h>
 #include <Angles2Coords/angles2coords_interface.h>
 #include <PDB2Coords/pdb2coords_interface.h>
 #include <Coords2TypedCoords/coords2typedcoords_interface.h>

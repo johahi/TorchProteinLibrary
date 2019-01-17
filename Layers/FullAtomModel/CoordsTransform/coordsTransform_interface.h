@@ -1,4 +1,4 @@
-#include <torch/torch.h>
+#include <torch/extension.h>
 void CoordsTranslate_forward(   at::Tensor input_coords, 
                                 at::Tensor output_coords,
                                 at::Tensor T,
