@@ -5,7 +5,7 @@ if( filenames.dtype() != at::kByte || res_names.dtype() != at::kByte || atom_nam
             throw("Incorrect tensor types");
 }
 ``` 
-" have been currently removed. 
+have been currently removed. However, it seems to work with Pytorch 1.0.
 
 # TorchProteinLibrary version 0.1
 This library pytorch layers for working with protein structures in a differentiable way. We are working on this project and it's bound to change:
