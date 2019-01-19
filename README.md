@@ -24,7 +24,7 @@ there will be interface changes to the current layers, addition of the new ones 
 
 Clone the repository:
 
-*git clone https://github.com/lupoglaz/TorchProteinLibrary.git*
+*git clone https://github.com/johahi/TorchProteinLibrary.git*
 
 then run the following command:
 
